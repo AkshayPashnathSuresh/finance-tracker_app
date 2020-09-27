@@ -15,7 +15,8 @@
                         <td><%= stock.ticker %></td>
                         <th scope="row"><%= stock.name %></th>
                         <td><%= stock.last_price %></td>
-                        <td>Actions</td>
+                        <td><%= link_to 'Remove', user_stock_path(stock), method: :delete, class: "btn btn-sm btn-warning",
+                                 data: { confirm: "Are you sure?" } %></td>
                     </tr>
                 <% end %>
             </tbody>
