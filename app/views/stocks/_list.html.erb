@@ -3,8 +3,8 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
                     <th scope="col">Ticker</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -12,8 +12,8 @@
             <tbody>
                 <% @tracked_stocks.each do |stock| %>
                     <tr>
-                        <th scope="row"><%= stock.name %></th>
                         <td><%= stock.ticker %></td>
+                        <th scope="row"><%= stock.name %></th>
                         <td><%= stock.last_price %></td>
                         <td>Actions</td>
                     </tr>
