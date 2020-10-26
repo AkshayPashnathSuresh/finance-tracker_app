@@ -5,15 +5,19 @@
                 <tr>
                     <th scope="col">Ticker</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Actions</th>
-                    <th scope="col refresh-button">
-                        <%= form_tag refresh_stock_path, method: :get do %>
-                            <%= button_tag type: :submit, class: "btn btn-info btn-sm" do %>
-                                        <% fa_icon 'refresh 2x' %>
+                    <th scope="col">Current Value</th>
+                    <th scope="col">Previous Value</th>
+                    <% if request.path == my_portfolio_path %>
+                        <th scope="col">
+                            <%= form_tag refresh_stock_path, method: :get do %>
+                                <%= button_tag type: :submit, class: "btn btn-info btn-sm" do %>
+                                            <% fa_icon 'refresh 2x' %>
+                                <% end %>
                             <% end %>
-                        <% end %>
-                    </th>
+                        </th>
+                    <% else %>
+                        <th scope="col"></th>
+                    <% end %>
                 </tr>
             </thead>
             <tbody>
@@ -21,7 +25,10 @@
                     <tr>
                         <td><%= stock.ticker %></td>
                         <th scope="row"><%= stock.name %></th>
-                        <td><%= stock.last_price %></td>
+                        <% stock.last_price = 0 if stock.last_price == nil %>
+                        <% stock.previous_price = 0 if stock.previous_price == nil %>
+                        <td class=<%= (stock.last_price > stock.previous_price)? "text-success": "text-danger"%> ><%= stock.last_price %></td>
+                        <td><%= stock.previous_price %></td>
                         <td><% if current_user.can_track_stock?(stock.ticker) %>
                                 <%= link_to('Add to Portfolio', user_stocks_path(user: current_user, ticker: stock.ticker),
                                             method: :post,class: "btn btn-xs btn-success") %>

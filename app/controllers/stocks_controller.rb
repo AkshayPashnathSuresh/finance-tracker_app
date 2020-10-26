@@ -24,6 +24,7 @@ class StocksController < ApplicationController
     def refresh
         current_user.stocks.each do |stock|
             new_stock = Stock.new_lookup(stock.ticker)
+            stock.previous_price = stock.last_price
             stock.last_price = new_stock.last_price
             stock.save
         end
