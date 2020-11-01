@@ -10,7 +10,7 @@
                     <% if request.path == my_portfolio_path %>
                         <th scope="col">
                             <%= form_tag refresh_stock_path, method: :get do %>
-                                <%= button_tag type: :submit, class: "btn btn-info btn-sm" do %>
+                                <%= button_tag type: :submit, class: "btn btn-info btn-sm", data: { confirm: "Are you sure to reload new stock data?(It may take some time)"} do %>
                                             <% fa_icon 'refresh 2x' %>
                                 <% end %>
                             <% end %>
